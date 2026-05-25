@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gümüş Elektrik | Üsküdar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: #0d0d0d; color: #f2f2f2; scroll-behavior: smooth; }
+        header { background-color: #1a1a1a; text-align: center; padding: 25px 0; border-bottom: 4px solid #f1c40f; }
+        header h1 { color: #f1c40f; margin: 0; font-size: 2.8rem; text-transform: uppercase; }
+        header p { margin: 8px 0; color: #fff; font-size: 1.2rem; }
+        
+        .section-title { text-align: center; margin-top: 40px; color: #fff; }
+        .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .category-box { background-color: #1a1a1a; border: 2px solid #333; border-radius: 15px; padding: 20px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .category-box:hover { border-color: #f1c40f; transform: translateY(-5px); }
+        .category-box img { width: 80px; height: 80px; object-fit: contain; margin-bottom: 10px; }
+        .category-box p { margin: 0; font-weight: bold; font-size: 1.1rem; color: #f1c40f; }
+        
+        #detail-panel { display: none; background: #1a1a1a; border: 3px solid #f1c40f; padding: 30px; border-radius: 15px; max-width: 600px; margin: 40px auto; text-align: center; }
+        #detail-panel h2 { color: #f1c40f; margin-top: 0; }
+        #detail-panel ul { list-style: none; padding: 0; font-size: 1.2rem; }
+        #detail-panel li { margin: 12px 0; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        
+        .footer-section { padding: 40px; text-align: center; background: #111; margin-top: 40px; border-top: 2px solid #333; }
+        .whatsapp-btn { background-color: #25d366; color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 15px; }
+        
+        /* Harita Butonu Stili */
+        .map-btn { display: inline-block; margin-top: 20px; padding: 15px 30px; background-color: #f1c40f; color: #000; text-decoration: none; font-weight: bold; border-radius: 8px; transition: 0.3s; }
+        .map-btn:hover { background-color: #d4ac0d; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>GÜMÜŞ ELEKTRİK</h1>
+        <p>SELİM KEÇECİ - Üsküdar</p>
+    </header>
+
+    <div class="section-title"><h2>Hizmet Kategorilerimiz</h2></div>
+
+    <div class="category-grid">
+        <div class="category-box" onclick="showDetail('Audio')"><img src="Audio.jpg"><p>Audio</p></div>
+        <div class="category-box" onclick="showDetail('Alarm')"><img src="Alarm.jpg"><p>Alarm</p></div>
+        <div class="category-box" onclick="showDetail('Uydu')"><img src="Uydu.jpg"><p>Uydu</p></div>
+        <div class="category-box" onclick="showDetail('Kamera')"><img src="Kamera.jpg"><p>Kamera</p></div>
+        <div class="category-box" onclick="showDetail('Anahtar')"><img src="Anahtar.jpg"><p>Anahtar</p></div>
+    </div>
+
+    <div id="detail-panel">
+        <h2 id="panel-title">Başlık</h2>
+        <ul id="panel-list"></ul>
+        <button onclick="document.getElementById('detail-panel').style.display='none'" style="margin-top:20px; padding:10px 25px; cursor:pointer;">Kapat</button>
+    </div>
+
+    <div class="footer-section">
+        <h3>İletişim ve Adres</h3>
+        <p>Altunizade, İcadiye Bağlarbaşı Cd. No:2 D:1D, 34662 Üsküdar/İstanbul</p>
+        <p>Tel: 0536 495 95 27</p>
+        <a href="https://wa.me/905364959527" class="whatsapp-btn">WhatsApp'tan Yazın</a>
+        
+        <h3>Konumumuz</h3>
+        <a href="https://www.google.com/maps/search/?api=1&query=Altunizade+İcadiye+Bağlarbaşı+Cd+No:2+Üsküdar" target="_blank" class="map-btn">
+            📍 Haritada Görüntüle ve Yol Tarifi Al
+        </a>
+    </div>
+
+    <script>
+        const data = {
+            'Audio': ['• Montaj Yapılır', '• Söküm Yapılır', '• Bakım Yapılır'],
+            'Alarm': ['• Montaj Yapılır', '• Bakım Yapılır', '• Söküm Yapılır'],
+            'Uydu': ['• Montaj Yapılır', '• Söküm Yapılır', '• Lmb takılır', '• Kablo Çekilir'],
+            'Kamera': ['• Montaj', '• Kurulum', '• Söküm yapılır'],
+            'Anahtar': ['• Anahtar Yapılır', '• Kepeng Anahtarı Yapılır', '• Garaj Kapısı Anahtarı Yapılır', '• Nfc Anahtar Yapılır', '• Araba Anahtarı Pil değişimi']
+        };
+
+        function showDetail(cat) {
+            const panel = document.getElementById('detail-panel');
+            const title = document.getElementById('panel-title');
+            const list = document.getElementById('panel-list');
+            
+            title.innerText = cat + " SİSTEMLERİ";
+            list.innerHTML = data[cat].map(item => `<li>${item}</li>`).join('');
+            panel.style.display = 'block';
+            panel.scrollIntoView({behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
